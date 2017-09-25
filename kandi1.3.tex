@@ -88,8 +88,8 @@
 \title{Älykellon sensoridataan perustuva QWERTY-näppäimistön käytön päättely}
 \author{Laura Paajanen}
 \date{\today}
-\level{kandi}
-\abstract{Älykellojen yleistyessä ja niiden erilaisten sensoreiden kehittyessä kellosta saattaa muodostua käyttäjän QWERTY-näppäimistön käytön päättelyyn käytettävä väline. Kellon liikesensoreiden tallentamasta sensoridatasta voidaan päätellä kirjoittajan ranteen liikkeet näppäimistöllä kirjoitettaessa, jolloin oikeanlaisella opetus- tai vertailudatalla näppäimistön käyttöä on mahdollista palauttaa sekä neuroverkkoihin että Bayes-mallinnukseen perustuvilla datan analysointimenetelmillä. Käytön päättelyä älykellon sensoridatan perusteella tutkittaessa on saatu onnistuneita tuloksia, vaikkakin todellisissa hyökkäystilanteissa muun muassa hyökkäyksen kohteiden erilaiset kirjoitustottumukset asettavat haasteita päättelyn onnistumiselle. }
+\level{kandi?}
+\abstract{Älykellojen yleistyessä ja niiden erilaisten sensoreiden kehittyessä kellosta saattaa muodostua käyttäjän QWERTY-näppäimistön käytön päättelyyn käytettävä väline. Kellon liikesensoreiden tallentamasta sensoridatasta voidaan päätellä kirjoittajan ranteen liikkeet näppäimistöllä kirjoitettaessa, jolloin oikeanlaisella opetus- tai vertailudatalla näppäimistön käyttöä on mahdollista palauttaa sekä neuroverkkoihin että Bayes-mallinnukseen perustuvilla datan analysointimenetelmillä. Tarkastelun kohteena on millä tavoin älykellojen sensoridatan avulla on mahdollista selvittää käyttäjän QWERTY-näppäimistön käyttöä, sekä millaisia uusia mahdollisuuksia älykellojen käyttö näppäimistön käytön päättelylle tarjoaa. Käytön päättelyä älykellon sensoridatan perusteella tutkittaessa on saatu onnistuneita tuloksia, vaikkakin todellisissa hyökkäystilanteissa muun muassa hyökkäyksen kohteiden erilaiset kirjoitustottumukset asettavat haasteita päättelyn onnistumiselle.}
 
 % The following can be used to specify keywords and classification of the paper:
 
@@ -137,17 +137,16 @@
 \mainmatter       % clear page, start arabic page numbering
 
 \section{Johdanto}
+
 Älykellot ja muut ranteessa käytettävät älylaitteet sisältävät lähes aina erilaisia liikkeitä havainnoivia sensoreita. Näiden sensoreiden dataa käytetään esimerkiksi laitteen hallintaan ja käyttäjän aktiivisuuden mittaamiseen, mutta sensoreiden tuottamaa dataa on mahdollista käyttää myös väärin esimerkiksi käyttäjän käsien liikkeiden perusteella tehtävään näppäimistön käytön päättelyyn. 
 
 International Data Corporation on arvioinut älykellojen myynnin kasvavan vuoteen 2021 mennessä jopa 70 miljoonaan kappaleeseen vuodessa kaikkien älyasusteiden arvioidun myyntimäärän ollessa lähes 200 miljoonaa~\cite{bi}. Älypuhelimissa, joissa mahdollisiin sivukanavahyökkäyksiin on jo osattu varautua, yksittäisen käyttäjän aktiivinen käyttöaika jäi vuonna 2013 keskimäärin 58 minuuttiin vuorokaudessa~\cite{john}. Vaikka puhelimien käyttöaika onkin varmasti viime vuosina kasvanut,  on älykellojen aktiivinen käyttöaika tästä huolimatta suurempi laitteen ollessa ranteessa ja toiminnassa jatkuvasti, jopa vuorokauden ympäri. Tällöin hyökkäykseen tarvittavaa dataa on mahdollista saada käyttäjältä paljon. 
 
 Älykellojen ja niiden liikesensorien tuottaman datan turvallisuutta on viime aikoina herätty tutkimaan enemmän, ja mahdollisia menetelmiä joilla tunnistaa sensoridatan perusteella QWERTY-näppäimistöllä näppäiltyä tekstiä on löydetty useita. Näiden tutkimusten perusteella mahdolliselle hyökkääjälle riittää päästä käsiksi älykellon lähettämään sensoridataan, jonka avulla on mahdollista palauttaa korkealla onnistumisprosentilla käyttäjän kirjoittama teksti.
 
-Tutkielmassa perehdytään siihen, mitä uusia mahdollisuuksia älykellojen liikesensoridata tarjoaa QWERTY-näppäimistön käytön päättelyyn, sekä millä menetelmillä liikesensoridatasta on mahdollista päätellä käyttäjän näppäimistön käyttöä. 
+Tutkielmassa perehdytään siihen, mitä uusia mahdollisuuksia älykellojen liikesensoridata tarjoaa QWERTY-näppäimistön käytön päättelyyn, sekä millä menetelmillä liikesensoridatasta on mahdollista päätellä käyttäjän näppäimistön käyttöä. Asiaan perehdytään kolmen toisistaan toteutustapojen osalta poikkeavan älykellon liikesensoridataan perustuvan tutkimuksen kautta, joissa sensoridatan avulla on pyritty palauttamaan käyttäjien näppäimistön käyttöä neuroverkkojen sekä todennäköisyysmallinnuksen avulla.
+
 Luvussa 2 käsitellään yleisesti QWERTY-näppäimistön käytön päättelytapojen lähtökohtia, sekä tarkastellaan aiemmin käytettyjen menetelmien heikkouksia älykellon tarjoamien, käytön päättelyä helpottavien tekijöiden näkökulmasta. Lisäksi luvussa määritellään tutkimuskysymykset. Luvussa 3 esitellään kerätyn ääni- ja liikesensoridatan mahdollisia analysointimenetelmiä. Luvussa 4 syvennytään aiempiin QWERTY-näppäimistön käytön päättelyyn tähtääviin menetelmiin, joissa hyökkäykseen on käytetty mikrofonien sekä älypuhelimen liikesensorien tuottamaa dataa. Älykellon käyttämistä hyökkäyskanavana käsitellään luvussa 5, jossa tarkastellaan kolmen eri tavoin toteutetun tutkimuksen tuloksia käytön päättelyn menetelmistä älykellon liikesensoridatan perusteella. Tuloksien lisäksi perehdytään tutkimusmenetelmiin, tehokkuuteen sekä  mahdollisiin heikkouksiin ja vahvuuksiin aiempiin menetelmiin verrattuna. Luvussa 6 kootaan tehdyt havainnot sekä pyritään niiden avulla vastaamaan esitettyihin tutkimuskysymyksiin, esitellään mahdollinen suojautumismenetelmä älykellojen avulla tehtävää näppäimistön käytön päättelyä vastaan sekä pohditaan sen käyttöönoton mahdollisuuksia. 
-
-TUTKIMUSKYSYMYKSET; TULOKSET; IMPAKTI
-
 
 
 \pagebreak
@@ -318,6 +317,9 @@ Opetusdatan jakaminen erilaisiin kirjoitustyyppeihin ja näppäimistöllä kirjo
 Tutkimustulokset sekä yksitellen että erityisesti yhdessä osoittavat vahvasti sen, että näppäimistön käytön päättely älykellojen sensoridatan perusteella on jo nyt mahdollista, ja esimerkiksi yhdistelemällä nyt käytettyjä metodeita ja hankkimalla tarvittava opetusdata suoraan käyttäjältä tuloksista voidaan saada erittäin paikkaansapitäviä.
 
 \section{Yhteenveto}
+
+Muistuttaa mieleen tutkimuskysymyksen, mainitsee tärkeimmät tulokset ja niiden perusteet. Keskittyy impaktiin ja esimerkiksi suosituksiin. Ei vain summeeraa luku kerrallaan aikaisempaa tekstiä
+
 
 Tutkimustulosten perusteella QWERTY-näppäimistön käytön päättely on mahdollista älykellon liikesensori- ja äänidatan avulla. Näppäimistön käytön päättely onnistuu sekä neuroverkkojen että todennäköisyysmallinnuksen avulla, ja kellon jatkuva käyttöaika antaa mahdolliselle hyökkääjälle keinon datankeräykseen ilman muita erillisiä datankerääjiä, kuten kameraa tai mikrofonia. Kun sensoridatan analysointiin käytetään hyviä analysointimenetelmiä, vaikuttaa käytön päättely älykellon avulla onnistuvan vähintään samalla tasolla kuin erillisiä kerääjiäkin käytettäessä. Älykellon käyttö hyökkäysvälineenä vähentää kuitenkin ulkoisten häiriöden vaikutuksia sekä datan keräämiseen vaadittavia laitteita. 
 
