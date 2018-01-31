@@ -39,6 +39,8 @@
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 \usepackage{multirow}
 \usepackage{floatrow}
+\usepackage{floatrow}
+\floatsetup[table]{capposition=top}
 \usepackage{color}
 \usepackage{float}
 \newcommand*\OK{\ding{51}}
@@ -159,7 +161,7 @@ Käyttäjän näppäimistön käytön selvittäminen on erittäin vahingollista 
 
 Monissa edellä mainituissa menetelmissä ongelmallista on ulkoisen datankerääjän, esimerkiksi mikrofonin, älypuhelimen tai kameran, sijainnin vaikutus kerättyyn dataan sekä mahdolliset kerääjään kohdistuvat häiriötekijät kerätyssä datassa~\cite{berger}. Puhelimen mikrofonin tai liikesensoreiden keräämään dataan vaikuttaa muun muassa puhelimen vaihtaminen näppäimistön oikealta puolelta vasemmalle puolelle~\cite{mar}. Äänidataan perustuva näppäimistön käytön päättely edellyttää muutoin kohtalaisen hiljaista käyttöympäristöä, jotta ympäröivät äänet eivät häiritsisi saatua äänidataa, ja kuvaan perustuvissa menetelmissä kameran tulee olla suunnattuna näppäimistöön tai sitä heijastaviin pintoihin, eikä edessä saa olla näköesteitä. Näitä häiriötekijöitä on saatu onnistuneesti vähennettyä käyttämällä datan keräämiseen älykelloa~\cite{liu}~\cite{maiti}~\cite{mole}. Aiempiin menetelmiin verrattuna älykellon käytössä datan keräämiseen on hyvänä puolena se, että kelloa käytetään lähtökohtaisesti samassa ranteessa, jolloin se on lähellä ja jatkuvasti lähes samalla etäisyydellä näppäimistöstä. Näin dataa kerättäessä virheellisiä tuloksia saadaan vähennettyä poistamalla sijainninvaihtelun aiheuttamat muutokset. 
 
-Tutkimuskysymyksiksi on valikoitunut millä tavoin älykellojen sensoridatan avulla on mahdollista selvittää käyttäjän QWERTY-näppäimistön käyttöä, sekä millaisia uusia mahdollisuuksia älykellojen käyttö näppäimistön käytön päättelylle tarjoaa. Älykellojen liikesensoridataa näppäimistön käytön päättelyyn käyttäviä tutkimuksia arvioidaan niiden tulosten sekä todellisiin hyökkäystilanteisiin kohdistuvien rajoitusten kautta. Aiemmista tutkimuksista käsitellään näppäimistön äänen tallentamista sekä puhelimen liikesensoridataa hyödyntäneitä näppäimistön käytön päättelymenetelmiä. Sekä äänidatan että liikesensoreiden tuottaman datan analysointitavat ovat samankaltaisia, ja useissa tutkimuksissa tutkimusasetelmat vastaavat hyvin toisiaan. Aiemmissa tutkimuksissa käytettyjen datan analysointimenetelmien implementoinnin toimivuutta tarkastellaan liikesensoridatan analysoinnin kannalta, ja tutkimusasetelmien samankaltaisuuksia ja eroavaisuuksia pyritään hahmottamaan arvioimalla tuloksia sekä menetelmissä havaittuja heikkouksia.
+Tutkimuskysymyksiksi on valikoitunut, millä tavoin älykellojen sensoridatan avulla on mahdollista selvittää käyttäjän QWERTY-näppäimistön käyttöä, sekä millaisia uusia mahdollisuuksia älykellojen käyttö näppäimistön käytön päättelylle tarjoaa. Älykellojen liikesensoridataa näppäimistön käytön päättelyyn käyttäviä tutkimuksia arvioidaan niiden tulosten sekä todellisiin hyökkäystilanteisiin kohdistuvien rajoitusten kautta. Aiemmista tutkimuksista käsitellään näppäimistön äänen tallentamista sekä puhelimen liikesensoridataa hyödyntäneitä näppäimistön käytön päättelymenetelmiä. Sekä äänidatan että liikesensoreiden tuottaman datan analysointitavat ovat samankaltaisia, ja useissa tutkimuksissa tutkimusasetelmat vastaavat hyvin toisiaan. Aiemmissa tutkimuksissa käytettyjen datan analysointimenetelmien implementoinnin toimivuutta tarkastellaan liikesensoridatan analysoinnin kannalta, ja tutkimusasetelmien samankaltaisuuksia ja eroavaisuuksia pyritään hahmottamaan arvioimalla tuloksia sekä menetelmissä havaittuja heikkouksia.
 
 
 \section{Datan analysointimenetelmiä}
@@ -198,7 +200,7 @@ Tutkimuksessa~\cite{mar} sensoridatan analysoinnissa käytetäänkin yksittäisi
 
 \section{Näppäimistön käytön päättely älykellon sensoridatan perusteella}
 Toisin kuin älypuhelimissa, älykelloissa sensorien datan kerääminen ja käyttö ei ole suojattua, eikä sensorien käytöstä näy käyttäjälle ilmoituskuvaketta~\cite{liu}. Näin ollen sensoridataa voidaan tallentaa ilman erityistä ilmoitusta ja lupaa käyttäjältä esimerkiksi juuri näppäimistöä käytettäessä.
-Älykelloissa käyttäjän liikkeiden päättelyyn käytetään sekä kiihtyvyyssensoria että maan vetovoimaan perustuvaa gyroskooppia. Liikkeiden lisäksi näppäimistön käytön päättelyyn käytetään yleensä myös kellon mikrofonin äänidataa, jolla saadusta liikesensoridatasta saadaan erotettua näppäimistön käyttöön liittyvät käden liikkeet muista liikkeistä. Taulukossa~\ref{t:1} esiteltävissä tutkimuksissa kerättyä dataa ja näppäimistön käyttöä analysoitiin kahdessa tutkimuksessa neuroverkkojen avulla~\cite{maiti}~\cite{liu}, ja yhdessä todennäköisyyslaskennan avulla~\cite{mole}.
+Älykelloissa käyttäjän liikkeiden päättelyyn käytetään sekä kiihtyvyyssensoria että maan vetovoimaan perustuvaa gyroskooppia. Liikkeiden lisäksi näppäimistön käytön päättelyyn käytetään yleensä myös kellon mikrofonin äänidataa, jolla saadusta liikesensoridatasta saadaan erotettua näppäimistön käyttöön liittyvät käden liikkeet muista liikkeistä. Taulukossa~\ref{t:1} sivulla \pageref{t:1} esiteltävissä tutkimuksissa kerättyä dataa ja näppäimistön käyttöä analysoitiin kahdessa tutkimuksessa neuroverkkojen avulla~\cite{maiti}~\cite{liu}, ja yhdessä todennäköisyyslaskennan avulla~\cite{mole}.
 
 \begin{table} [h]
     \begin{tabular}{ | p{10mm} | p{25mm} | p{2mm} | p{2mm} | p{20mm} | p{10mm} | p{25mm} | }
@@ -273,31 +275,29 @@ Bayes-mallinnusta käyttävä moduuli saa syötteenä uudelleen skaalatun UPC:n,
 
 \subsection{Tulokset}
 
-Älykellon liikesensoridatan avulla tehdyissä tutkimuksissa~\cite{maiti} ~\cite{liu}~\cite{mole} näppäilyn käytön päättelyn tulokset vaihtelevat taulukon~\ref{t:2} mukaisesti riippuen analysointimenetelmästä sekä hyökkäyksen kohteen kirjoitustyylistä. Merkittäväksi tekijäksi kaikissa tutkimuksissa nousi kirjoittajan kirjoitustyylin samankaltaisuus hyökkäyksessä käytetyn vertailudatan tuottajan kanssa.
+Älykellon liikesensoridatan avulla tehdyissä tutkimuksissa~\cite{maiti} ~\cite{liu}~\cite{mole} näppäilyn käytön päättelyn tulokset vaihtelevat taulukon~\ref{table:2} sivulla \pageref{table:2} mukaisesti riippuen analysointimenetelmästä sekä hyökkäyksen kohteen kirjoitustyylistä. Merkittäväksi tekijäksi kaikissa tutkimuksissa nousi kirjoittajan kirjoitustyylin samankaltaisuus hyökkäyksessä käytetyn vertailudatan tuottajan kanssa.
 \linebreak
 
-\begin{table} [h]
+\begin{table} [h] \caption{Tulokset}\label{table:2}
     \begin{tabular}{ | l | p{55mm} | p{55mm} | }
-    \toprule
+    \rot{\underline{tutkimus}} & \rot{\underline{tutkimusasetelma}} & \rot{\underline{tulokset}} \\
+        \toprule
       ~\cite{maiti} & Käytössä Harvard-lauseet, joista mukaan valittiin 48 kappaletta vähintään neljä merkkiä pitkiä sanoja  & Parhaassa tapauksessa, jossa hyökkäyksen kohteen kirjoitustyyli lähimpänä opetusdataa, palautettiin täysin oikein 78\%  \\
       \midrule
       ~\cite{liu} & 1) Aiemmin toteutettu tutkimus, jossa corncob-sanakirja ja 35 testisanaa  & Testihenkilöistä riippuen 49-61\% sanoista viiden todennäköisimmän sanan listalla, ja huomioitaessa 10 todennäköisintä sanaa tulokset välillä 58-69\%  \\
-      \arrayrulecolor{lightgray}
-      \midrule
       & 2) Ennalta määritetystä uutisesta satunnaisesti valitut 20 lausetta (765 sanaa), kun vertailusanakirjassa saman toimittajan muita kirjoituksia & Täysin oikein palautettiin 57\%, ja kolmen todennäköisimmän joukossa 88\% \\
-      \arrayrulecolor{black}
       \midrule
       ~\cite{mole} & 2400 yksittäistä sanaa, opetusdatana hyökkääjän syöttämät 500 sanan yksittäisten kirjainten painallukset & 30\%  syötetyistä sanoista viiden todennäköisimmän sanan joukossa. Jos kirjoitettaessa käsien aloituskohta oikea, niin sama 30\% sanoista ensimmäinen tarjottu vaihtoehto \\
       \bottomrule
     \end{tabular}
-    \caption{Tulokset}\label{t:2}
+    
 \end{table}
     
 \pagebreak
 Erityisen alhaiseksi kirjoitetun sanan löytyminen jää posterioritodennäköisyyteen perustuvassa tutkimuksessa~\cite{mole}, jossa tutkimusasetelmasta poikkeavalla kirjoitustavalla todennäköisyys, että oikea sana on 24 korkeimman arvon joukossa saaneissa on 30\%. Kirjoitettaessa käsien ollessa oletetussa sijainnissa samalla 30\% todennäköisyydellä haettu sana on ensimmäinen löydetty vaihtoehto. Myös neuroverkkoja hyödyntävissä tutkimuksissa~\cite{maiti}~\cite{liu} sanojen tunnistus lyhyiden 3-4 merkkiä pitkien sanojen kohdalla oli heikkoa, sillä niiden liikeprofiilit eivät eronneet merkittävästi toisistaan. Lyhyiden sanojen ollessa usein artikkeleita tai konjunktioita, oletetaan niiden olevan usein pääteltävissä kontekstista, ja arvioissa keskitytään pitkien sanojen tunnistustarkkuuteen. Ilmansuuntajakoa käyttävän tutkimuksen~\cite{maiti} sanatunnistukseen tähtäävässä testissä käytetään kymmentä Harvard-lausetta~\cite{har}, joissa vähintään neljän merkin pituisia sanoja on 48 kappaletta. Tutkittaessa opetusdatan kirjoittaneen käyttäjän tuloksia näistä sanoista vain kolme tunnistettiin väärin onnistumisprosentin ollessa tällöin 93,75\%. Kaikille 25:lle osallistujalle tehdyn kokeen sanojen tunnistusprosentti vaihteli laajasti osallistujien kesken. Korkeimmat tunnistusprosentit (21 oikein 27:stä) saavutettiin niillä testihenkilöillä, joiden kirjoitusnopeus oli lähimpänä neuroverkoille annetun opetusdatan kirjoittajan kirjoitusnopeutta. 
 
 Näppäimistön rivijakoon perustuvassa tutkimuksessa~\cite{liu} ensimmäisen koeasetelman tapauksessa viiden testihenkilön kohdalla toistettiin aiemmassa tutkimuksessa toteutettu koe, jossa näppäimistön käyttöä pyrittiin päättelemään erillisellä mikrofonilla tallennetun äänidatan avulla~\cite{berger}. Käytössä oli corncob-sanakirja~\cite{corn}, ja tarkoituksena palauttaa 35 testisanaa, joiden pituudet vaihtelivat seitsemän ja 13 merkin välillä.
-Alkuperäisessä tutkimuksessa~\cite{berger} näppäimistön käyttöä pääteltiin äänidatan avulla. Tutkimuksessa tallennettiin näppäimistön ääntä erillisten sanojen osalta, ja äänidatan perusteella pyrittiin yhdistämään kirjoitettu sana sanakirjasta löytyvään sanaan. Verrattuna aiemman tutkimuksen tuloksiin oikeiden tulosten määrä älykellon sensoridataa, liikemalleja ja vertailualgoritmia käytettäessä oli selkeästi korkeampi. Älykellon datan perusteella etsitty sana oli kymmenen todennäköisimmän sanan joukossa 63\% tapauksista pelkkään äänidataan perustuvan tutkimuksen tulosten jäädessä 43\% tasolle. Älypuhelimen liikesensoridataa käyttäneessä tutkimuksessa~\cite{mar} tulokset olivat taulukon ~\ref{t:3} mukaisesti samaa tasoa pelkkään äänidataan perustuvan alkuperäisen tutkimuksen~\cite{berger} kanssa.
+Alkuperäisessä tutkimuksessa~\cite{berger} näppäimistön käyttöä pääteltiin äänidatan avulla. Tutkimuksessa tallennettiin näppäimistön ääntä erillisten sanojen osalta, ja äänidatan perusteella pyrittiin yhdistämään kirjoitettu sana sanakirjasta löytyvään sanaan. Verrattuna aiemman tutkimuksen tuloksiin oikeiden tulosten määrä älykellon sensoridataa, liikemalleja ja vertailualgoritmia käytettäessä oli selkeästi korkeampi. Älykellon datan perusteella etsitty sana oli kymmenen todennäköisimmän sanan joukossa 63\% tapauksista pelkkään äänidataan perustuvan tutkimuksen tulosten jäädessä 43\% tasolle. Älypuhelimen liikesensoridataa käyttäneessä tutkimuksessa~\cite{mar} tulokset olivat taulukon~\ref{t:3} sivulla~\pageref{t:3} mukaisesti samaa tasoa pelkkään äänidataan perustuvan alkuperäisen tutkimuksen~\cite{berger} kanssa.
 
 \begin{table} [h]
     \begin{tabular}{ | l | p{25mm} | p{25mm} | p{25mm} | }
